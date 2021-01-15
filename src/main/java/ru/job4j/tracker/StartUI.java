@@ -1,6 +1,6 @@
 package ru.job4j.tracker;
 
-import java.sql.SQLOutput;
+
 
 public class StartUI {
 
@@ -19,17 +19,18 @@ public class StartUI {
         item3.setName("Ivan");
         item4.setName("OtherName2");
         System.out.println("All items:");
-        for (Item items: tracker.findAll()) {
+        for (Item items : tracker.findAll()) {
             System.out.println(items.getName());
         }
         System.out.println();
         System.out.println("Array with name - \"Ivan\":");
-        for (Item mass: tracker.findByName("Ivan")) {
+        for (Item mass : tracker.findByName("Ivan")) {
             System.out.println(mass.getName());
-         }
+        }
         System.out.println();
         tracker.findById(item4.getId());
         System.out.println("Name itemId:");
         System.out.println(tracker.findById(3).getName());
     }
 }
+

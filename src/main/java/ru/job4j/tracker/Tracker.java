@@ -7,10 +7,9 @@ public class Tracker {
     private int size = 0;
     private int ids = 1;
 
-    public Item add(Item item) {
-        item.setId(ids++);
+    public void add(Item item) {
         items[size++] = item;
-        return item;
+        item.setId(ids++);
     }
 
     public Item[] findAll() {
@@ -29,14 +28,25 @@ public class Tracker {
     }
 
     public Item findById(int id) {
-        Item buff = null;
-        for (int i = 0; i < items.length; i++) {
+         int index = indexOf(id);
+        return index != -1 ? items[index] : null;
+    }
+    private int indexOf(int id) {
+        int index = -1;
+        for (int i = 0; i < size; i++) {
             if (items[i].getId() == id) {
-                buff = items[i];
-                break;
+                index = i;
             }
         }
-        return buff;
+        return index;
+    }
+        public boolean replace(int id, Item item) {
+         items[indexOf(id)] = item;
+            item.setId(id);
+            return indexOf(id) != -1;
+
     }
 }
+
+
 
