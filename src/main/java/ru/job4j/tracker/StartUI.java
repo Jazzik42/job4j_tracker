@@ -31,6 +31,9 @@ public class StartUI {
         tracker.findById(item4.getId());
         System.out.println("Name itemId:");
         System.out.println(tracker.findById(3).getName());
+        System.out.println();
+        System.out.println("toString():");
+        System.out.println(item);
     }
 }
 
