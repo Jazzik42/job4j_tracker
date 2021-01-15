@@ -12,9 +12,7 @@ public class Tracker {
         items[size++] = item;
         return item;
     }
-    public int size(){
-        return size;
-    }
+
     public Item[] findAll() {
         Item[] massiv = Arrays.copyOf(items, size);
         return massiv;
@@ -24,9 +22,9 @@ public class Tracker {
         Item[] massiv = new Item[size];
         int buff = 0;
         for (int i = 0; i < size; i++) {
-                if (items[i].getName().equals(name)) {
+            if (items[i].getName().equals(name)) {
                 massiv[buff++] = items[i];
-                }
+            }
         }
         massiv = Arrays.copyOf(massiv, buff);
         return massiv;
