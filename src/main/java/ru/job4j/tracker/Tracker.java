@@ -14,8 +14,7 @@ public class Tracker {
     }
 
     public Item[] findAll() {
-        Item[] massiv = Arrays.copyOf(items, size);
-        return massiv;
+        return Arrays.copyOf(items, size);
     }
 
     public Item[] findByName(String name) {
@@ -26,8 +25,7 @@ public class Tracker {
                 massiv[buff++] = items[i];
             }
         }
-        massiv = Arrays.copyOf(massiv, buff);
-        return massiv;
+        return Arrays.copyOf(massiv, buff);
     }
 
     public Item findById(int id) {
