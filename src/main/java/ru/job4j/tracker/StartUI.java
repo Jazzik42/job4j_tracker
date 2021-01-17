@@ -14,57 +14,62 @@ public class StartUI {
             int itemId;
             switch (select) {
                 case 0:
-                    System.out.println("Введите пожалуйста имя заявки:");
+                    System.out.println("=== Create a new Item ====");
+                    System.out.println("Enter name:");
                     itemName = scanner.nextLine();
                     item = new Item();
                     tracker.add(item);
                     item.setName(itemName);
                     break;
                 case 1:
-                    System.out.println("All items:");
+                    System.out.println("=== All items ===");
                     for (Item items : tracker.findAll()) {
                         System.out.println(items.getName());
                     }
                     break;
                 case 2:
+                    System.out.println("=== Edit item ===");
                     item = new Item();
-                    System.out.println("Введите пожалуйста имя заявки:");
+                    System.out.println("Enter name:");
                     itemName = scanner.nextLine();
-                    System.out.println("Введите пожалуйста Id заявки:");
+                    System.out.println("Enter id:");
                     itemId = Integer.valueOf(scanner.nextLine());
                     item.setName(itemName);
-                    System.out.println(tracker.replace(itemId, item) ? "Заявка успешно заменена."
-                            : "Заявки с таким id не существует.");
+                    System.out.println(tracker.replace(itemId, item) ? "The application has been replaced."
+                            : "There is no application with this id.");
                     break;
                 case 3:
-                    System.out.println("Введите пожалуйста Id заявки:");
+                    System.out.println("=== Delete item ===");
+                    System.out.println("Enter Id:");
                     itemId = Integer.valueOf(scanner.nextLine());
                     if (tracker.delete(itemId)) {
-                        System.out.println("Заявка успешно удалена.");
+                        System.out.println("The application has been deleted.");
                     } else {
-                        System.out.println("Заявки с таким id не существует.");
+                        System.out.println("There is no application with this id.");
                     }
                     break;
                     case 4:
-                    System.out.println("Введите пожалуйста Id заявки:");
+                    System.out.println("=== Find item by Id ===");
+                    System.out.println("Enter Id:");
                     itemId = Integer.valueOf(scanner.nextLine());
                     item = tracker.findById(itemId);
                     if (item != null) {
-                        System.out.println("Id заявки:" + item.getName());
+                        System.out.println("Item Name:" + item.getName());
                     } else {
-                        System.out.println("Заявки с таким id не существует.");
+                        System.out.println("There is no application with this id.");
                     }
                     break;
                 case 5:
-                    System.out.println("Введите пожалуйста имя заявки:");
+                    System.out.println("=== Find item by Name ===");
+                    System.out.println("Enter name:");
                     itemName = scanner.nextLine();
                     Item[] item2 = tracker.findByName(itemName);
                     if (item2 != null) {
                         for (Item items : item2) {
-                            System.out.println("Id заявки:" + items.getId());
+                            System.out.println("Item Id:" + items.getId());
                         }
                     } else {
-                        System.out.println("Заявок с таким именем не существует.");
+                            System.out.println("There are no applications with this name.");
                     }
                     break;
                 case 6:
