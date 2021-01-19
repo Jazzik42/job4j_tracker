@@ -9,40 +9,36 @@ public class StartUI {
             this.showMenu();
             System.out.println("Select:");
             int select = Integer.valueOf(scanner.nextLine());
-            Item item;
-            String itemName;
-            int itemId;
             switch (select) {
                 case 0:
                     System.out.println("=== Create a new Item ====");
                     System.out.println("Enter name:");
-                    itemName = scanner.nextLine();
-                    item = new Item();
-                    tracker.add(item);
-                    item.setName(itemName);
+                    String itemName1 = scanner.nextLine();
+                    Item item1 = new Item(itemName1);
+                    tracker.add(item1);
                     break;
                 case 1:
                     System.out.println("=== All items ===");
                     for (Item items : tracker.findAll()) {
-                        System.out.println(items.getName());
+                        System.out.println(items.getName() + " " + items.getId());
                     }
                     break;
                 case 2:
                     System.out.println("=== Edit item ===");
-                    item = new Item();
+                    Item item2 = new Item();
                     System.out.println("Enter name:");
-                    itemName = scanner.nextLine();
+                    String itemName2 = scanner.nextLine();
                     System.out.println("Enter id:");
-                    itemId = Integer.valueOf(scanner.nextLine());
-                    item.setName(itemName);
-                    System.out.println(tracker.replace(itemId, item) ? "The application has been replaced."
+                    int itemId2 = Integer.valueOf(scanner.nextLine());
+                    item2.setName(itemName2);
+                    System.out.println(tracker.replace(itemId2, item2) ? "The application has been replaced."
                             : "There is no application with this id.");
                     break;
                 case 3:
                     System.out.println("=== Delete item ===");
                     System.out.println("Enter Id:");
-                    itemId = Integer.valueOf(scanner.nextLine());
-                    if (tracker.delete(itemId)) {
+                    int itemId3 = Integer.valueOf(scanner.nextLine());
+                    if (tracker.delete(itemId3)) {
                         System.out.println("The application has been deleted.");
                     } else {
                         System.out.println("There is no application with this id.");
@@ -51,10 +47,10 @@ public class StartUI {
                     case 4:
                     System.out.println("=== Find item by Id ===");
                     System.out.println("Enter Id:");
-                    itemId = Integer.valueOf(scanner.nextLine());
-                    item = tracker.findById(itemId);
-                    if (item != null) {
-                        System.out.println("Item Name:" + item.getName());
+                    int itemId4 = Integer.valueOf(scanner.nextLine());
+                    Item item4 = tracker.findById(itemId4);
+                    if (item4 != null) {
+                        System.out.println("Item Name:" + item4.getName());
                     } else {
                         System.out.println("There is no application with this id.");
                     }
@@ -62,10 +58,10 @@ public class StartUI {
                 case 5:
                     System.out.println("=== Find item by Name ===");
                     System.out.println("Enter name:");
-                    itemName = scanner.nextLine();
-                    Item[] item2 = tracker.findByName(itemName);
-                    if (item2 != null) {
-                        for (Item items : item2) {
+                    String itemName5 = scanner.nextLine();
+                    Item[] itemArr = tracker.findByName(itemName5);
+                    if (itemArr != null) {
+                        for (Item items : itemArr) {
                             System.out.println("Item Id:" + items.getId());
                         }
                     } else {
