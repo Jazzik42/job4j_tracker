@@ -52,7 +52,7 @@ public static void findItemByName(Input input, Tracker tracker){
         System.out.println("=== Find item by Name ===");
         String itemName5=input.askStr("Enter name:");
         Item[]itemArr=tracker.findByName(itemName5);
-        if(itemArr!=null){
+        if(itemArr.length != 0){
         for(Item items:itemArr){
         System.out.println("Item Id:"+items.getId());
         }
