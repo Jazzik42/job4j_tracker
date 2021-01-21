@@ -17,4 +17,18 @@ public class StartUITest {
         assertThat(created.getName(), is(expected.getName()));
 
     }
+
+    @Test
+    public void replace(){
+        Tracker tracker = new Tracker();
+        Item item = new Item("new item");
+        tracker.add(item);
+        String[] answers = { "replaced item",
+                String.valueOf(item.getId())
+
+        };
+        StartUI.editItem(new StubInput(answers), tracker);
+        Item replaced = tracker.findById(item.getId());
+        assertThat(replaced.getName(), is("replaced item"));
+    }
 }
