@@ -94,8 +94,8 @@ public static void findItemByName(Input input, Tracker tracker){
         Output output = new ConsoleOutput();
         Input input = new ConsoleInput();
         Tracker tracker = new Tracker();
-        UserAction[] actions = {new CreateAction(output), new DeleteAction(), new FindAllAction(),
-        new FindByIdAction(), new FindByNameAction(), new ReplaceAction(), new ExitProgramAction(output)};
+        UserAction[] actions = {new CreateAction(output), new DeleteAction(output), new FindAllAction(output),
+        new FindByIdAction(output), new FindByNameAction(output), new ReplaceAction(output), new ExitProgramAction(output)};
         new StartUI(output).init(input, tracker, actions);
 
     }
