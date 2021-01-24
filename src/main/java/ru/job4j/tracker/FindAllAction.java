@@ -13,6 +13,7 @@ public class FindAllAction implements UserAction {
 
     @Override
     public boolean execute(Input input, Tracker tracker) {
+        output.println("=== All item ===");
         for (Item items : tracker.findAll()) {
             output.println(items.getName() + " " + items.getId());
         }

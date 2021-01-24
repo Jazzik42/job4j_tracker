@@ -14,10 +14,11 @@ public class FindByIdAction implements UserAction {
 
     @Override
     public boolean execute(Input input, Tracker tracker) {
+        output.println("=== Find item by Id ===");
         int itemId = input.askInt("Enter Id:");
         Item item = tracker.findById(itemId);
         if (item != null) {
-            output.println("Item Name:" + item.getName());
+            output.println("Item Name: " + item.getName());
         } else {
             output.println("There is no application with this id.");
         }

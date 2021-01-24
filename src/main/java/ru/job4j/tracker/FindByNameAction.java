@@ -14,11 +14,12 @@ public class FindByNameAction implements UserAction {
 
     @Override
     public boolean execute(Input input, Tracker tracker) {
+        output.println("=== Find item by Name ===");
         String itemName = input.askStr("Enter name:");
         Item[] itemArr = tracker.findByName(itemName);
         if (itemArr.length != 0) {
             for (Item items : itemArr) {
-                output.println("Item Id:" + items.getId());
+                output.println("Item Id: " + items.getId());
             }
         } else {
             output.println("There are no applications with this name.");
