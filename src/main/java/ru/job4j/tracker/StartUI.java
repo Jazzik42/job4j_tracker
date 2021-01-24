@@ -4,6 +4,12 @@ package ru.job4j.tracker;
 import javax.security.auth.login.CredentialException;
 
 public class StartUI {
+    public final Output output;
+
+    public StartUI(Output output) {
+        this.output = output;
+    }
+
 public static void createItem(Input input, Tracker tracker){
         System.out.println("=== Create a new Item ====");
         String itemName1=input.askStr("Enter name:");
@@ -71,25 +77,26 @@ public static void findItemByName(Input input, Tracker tracker){
                 run = action.execute(input, tracker);
 
             } else {
-                System.out.println("Choose from 0 to 6");
+                output.println("Choose from 0 to 6");
                 continue;
             }
         }
         }
 
     private void showMenu(UserAction[] actions) {
-        System.out.println("Menu:");
+        output.println("Menu:");
         for (int i = 0; i < actions.length; i++) {
             System.out.println(i + "." + actions[i].name());
         }
     }
 
     public static void main(String[] args) {
+        Output output = new ConsoleOutput();
         Input input = new ConsoleInput();
         Tracker tracker = new Tracker();
-        UserAction[] actions = {new CreateAction(), new DeleteAction(), new FindAllAction(),
-        new FindByIdAction(), new FindByNameAction(), new ReplaceAction(), new ExitProgramAction()};
-        new StartUI().init(input, tracker, actions);
+        UserAction[] actions = {new CreateAction(output), new DeleteAction(), new FindAllAction(),
+        new FindByIdAction(), new FindByNameAction(), new ReplaceAction(), new ExitProgramAction(output)};
+        new StartUI(output).init(input, tracker, actions);
 
     }
 }
