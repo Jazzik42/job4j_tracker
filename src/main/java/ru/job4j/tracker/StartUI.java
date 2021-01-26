@@ -92,7 +92,7 @@ public static void findItemByName(Input input, Tracker tracker){
 
     public static void main(String[] args) {
         Output output = new ConsoleOutput();
-        Input input = new ConsoleInput();
+        Input input = new ValidateConsoleInput();
         Tracker tracker = new Tracker();
         UserAction[] actions = {new CreateAction(output), new DeleteAction(output), new FindAllAction(output),
         new FindByIdAction(output), new FindByNameAction(output), new ReplaceAction(output), new ExitProgramAction(output)};
