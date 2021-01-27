@@ -72,15 +72,13 @@ public static void findItemByName(Input input, Tracker tracker){
         while (run) {
             this.showMenu(actions);
             int select = input.askInt("Select: ");
-            if (select >=0 && select <= 6) {
-                UserAction action = actions[select];
-                run = action.execute(input, tracker);
-
-            } else {
-                output.println("Choose from 0 to 6");
+            if (select < 0 || select >= actions.length) {
+                output.println("Wrong input, you can select: 0 .. " + (actions.length - 1));
                 continue;
             }
-        }
+            UserAction action = actions[select];
+            run = action.execute(input, tracker);
+            }
         }
 
     private void showMenu(UserAction[] actions) {
