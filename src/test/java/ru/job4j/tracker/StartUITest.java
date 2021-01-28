@@ -8,42 +8,6 @@ import static org.hamcrest.core.IsNull.nullValue;
 
 public class StartUITest {
     @Test
-    public void whenAddItem() {
-        String[] answers = {"Fix PC"};
-        Input input = new StubInput(answers);
-        Tracker tracker = new Tracker();
-        StartUI.createItem(input, tracker);
-        Item created = tracker.findAll()[0];
-        Item expected = new Item("Fix PC");
-        assertThat(created.getName(), is(expected.getName()));
-
-    }
-
-    @Test
-    public void replace() {
-        Tracker tracker = new Tracker();
-        Item item = new Item();
-        tracker.add(item);
-        String[] answers = {"replaced item",
-                String.valueOf(item.getId())
-
-        };
-        StartUI.editItem(new StubInput(answers), tracker);
-        Item replaced = tracker.findById(item.getId());
-        assertThat(replaced.getName(), is("replaced item"));
-    }
-
-    @Test
-    public void delete() {
-        Tracker tracker = new Tracker();
-        Item item = new Item();
-        tracker.add(item);
-        String[] answer = {String.valueOf(item.getId())};
-        StartUI.deleteItem(new StubInput(answer), tracker);
-        assertThat(tracker.findById(item.getId()), is(nullValue()));
-    }
-
-    @Test
     public void testInit() {
         Tracker tracker = new Tracker();
         Output output = new ConsoleOutput();
@@ -89,7 +53,10 @@ public class StartUITest {
         UserAction[] userActions = {new ExitProgramAction(output)};
         Input input = new StubInput(answers);
         new StartUI(output).init(input, tracker, userActions);
-        assertThat(output.toString(), is("Menu:" + System.lineSeparator() + "===Exit===" + System.lineSeparator()));
+        assertThat(output.toString(), is("Menu:" + System.lineSeparator() +
+                "0.===Exit===" + System.lineSeparator() +
+                "===Exit===" + System.lineSeparator()
+        ));
     }
 
     @Test
@@ -103,9 +70,13 @@ public class StartUITest {
         Input input = new StubInput(answers);
         new StartUI(output).init(input, tracker, userActions);
         assertThat(output.toString(), is("Menu:" + System.lineSeparator() +
+                "0.=== All item ===" + System.lineSeparator() +
+                "1.===Exit===" + System.lineSeparator() +
                 "=== All item ===" + System.lineSeparator() +
                 item.getName() + " " + item.getId() + System.lineSeparator()
-                + "Menu:" + System.lineSeparator()
+                + "Menu:" + System.lineSeparator() +
+                "0.=== All item ===" + System.lineSeparator() +
+                "1.===Exit===" + System.lineSeparator()
                 + "===Exit===" + System.lineSeparator()
         ));
     }
@@ -121,9 +92,13 @@ public class StartUITest {
         UserAction[] userActions = {new FindByNameAction(output), new ExitProgramAction(output)};
         new StartUI(output).init(input, tracker, userActions);
         assertThat(output.toString(), is("Menu:" + System.lineSeparator() +
+                "0.=== Find item by Name ===" + System.lineSeparator() +
+                 "1.===Exit===" + System.lineSeparator() +
                 "=== Find item by Name ===" + System.lineSeparator() +
                 "Item Id: " + item.getId() + System.lineSeparator()
-                + "Menu:" + System.lineSeparator()
+                + "Menu:" + System.lineSeparator() +
+                "0.=== Find item by Name ===" + System.lineSeparator() +
+                 "1.===Exit===" + System.lineSeparator()
                 + "===Exit===" + System.lineSeparator()
         ));
     }
@@ -139,9 +114,13 @@ public class StartUITest {
         UserAction[] userActions = {new FindByIdAction(output), new ExitProgramAction(output)};
         new StartUI(output).init(input, tracker, userActions);
         assertThat(output.toString(), is("Menu:" + System.lineSeparator() +
+                "0.=== Find item by Id ===" + System.lineSeparator() +
+                "1.===Exit===" + System.lineSeparator() +
                 "=== Find item by Id ===" + System.lineSeparator() +
                 "Item Name: " + item.getName() + System.lineSeparator()
-                + "Menu:" + System.lineSeparator()
+                + "Menu:" + System.lineSeparator() +
+                "0.=== Find item by Id ===" + System.lineSeparator() +
+                "1.===Exit===" + System.lineSeparator()
                 + "===Exit===" + System.lineSeparator()
         ));
     }
