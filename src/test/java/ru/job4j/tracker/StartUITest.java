@@ -141,6 +141,44 @@ public class StartUITest {
                     )
         ));
 }
+
+    @Test
+    public void whenInvalidInput() {
+        Output out = new StubOutput();
+        Input in = new StubInput(
+                new String[] {"one", "1"}
+        );
+        ValidateConsoleInput input = new ValidateConsoleInput(out, in);
+        int selected = input.askInt("Enter menu:");
+        assertThat(selected, is(1));
+    }
+
+    @Test
+    public void whenValidateRight() {
+        Output out = new StubOutput();
+        Input in = new StubInput(new String[]{"1"});
+        ValidateConsoleInput input = new ValidateConsoleInput(out, in);
+        int selected = input.askInt("Enter menu:");
+        assertThat(selected, is(1));
+    }
+
+    @Test
+    public void whenValidateAllRight() {
+        Output out = new StubOutput();
+        Input in = new StubInput(new String[]{"1", "1", "1"});
+        ValidateConsoleInput input = new ValidateConsoleInput(out, in);
+        int selected = input.askInt("Enter menu:");
+        assertThat(selected, is(1));
+    }
+
+    @Test
+    public void whenValidateNegativeNumber() {
+        Output out = new StubOutput();
+        Input in = new StubInput(new String[]{"-1"});
+        ValidateConsoleInput input = new ValidateConsoleInput(out, in);
+        int selected = input.askInt("Enter menu:");
+        assertThat(selected, is(- 1));
+    }
 }
 
 
