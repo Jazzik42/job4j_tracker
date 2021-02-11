@@ -2,6 +2,9 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 import static org.hamcrest.core.IsNull.nullValue;
@@ -11,23 +14,27 @@ public class StartUITest {
     public void testInit() {
         Tracker tracker = Tracker.getTracker();
         Output output = new ConsoleOutput();
-        UserAction[] userAction = {new CreateAction(output), new ExitProgramAction(output)};
+        List<UserAction> actions = new ArrayList<>();
+        actions.add(new CreateAction(output));
+        actions.add(new ExitProgramAction(output));
         String[] answer = new String[]{"0", "Item name", "1"};
         Input input = new StubInput(answer);
-        new StartUI(output).init(input, tracker, userAction);
-        assertThat(tracker.findAll()[0].getName(), is("Item name"));
+        new StartUI(output).init(input, tracker, actions);
+        assertThat(tracker.findAll().get(0).getName(), is("Item name"));
     }
 
     @Test
     public void whenReplaceAction() {
         Tracker tracker = Tracker.getTracker();
         Output output = new ConsoleOutput();
-        UserAction[] userAction = {new ReplaceAction(output), new ExitProgramAction(output)};
+        List<UserAction> actions = new ArrayList<>();
+        actions.add(new ReplaceAction(output));
+        actions.add(new ExitProgramAction(output));
         Item item = new Item("Item Name");
         tracker.add(item);
         String[] answers = new String[]{"0", "New Item Name", "1", "1"};
         Input input = new StubInput(answers);
-        new StartUI(output).init(input, tracker, userAction);
+        new StartUI(output).init(input, tracker, actions);
         assertThat(tracker.findById(item.getId()).getName(), is("New Item Name"));
     }
 
@@ -38,9 +45,11 @@ public class StartUITest {
         Item item = new Item("Item name");
         tracker.add(item);
         String[] answers = new String[]{"0", "1", "1"};
-        UserAction[] userAction = {new DeleteAction(output), new ExitProgramAction(output)};
+        List<UserAction> actions = new ArrayList<>();
+        actions.add(new DeleteAction(output));
+        actions.add(new ExitProgramAction(output));
         Input input = new StubInput(answers);
-        new StartUI(output).init(input, tracker, userAction);
+        new StartUI(output).init(input, tracker, actions);
         assertThat(tracker.findById(item.getId()), is(nullValue()));
 
     }
@@ -50,9 +59,10 @@ public class StartUITest {
         Tracker tracker = Tracker.getTracker();
         Output output = new StubOutput();
         String[] answers = new String[]{"0"};
-        UserAction[] userActions = {new ExitProgramAction(output)};
-        Input input = new StubInput(answers);
-        new StartUI(output).init(input, tracker, userActions);
+        List<UserAction> actions = new ArrayList<>();
+        actions.add(new ExitProgramAction(output));
+       Input input = new StubInput(answers);
+        new StartUI(output).init(input, tracker, actions);
         assertThat(output.toString(), is("Menu:" + System.lineSeparator() +
                 "0.===Exit===" + System.lineSeparator() +
                 "===Exit===" + System.lineSeparator()
@@ -66,9 +76,11 @@ public class StartUITest {
         tracker.add(item);
         String[] answers = new String[]{"0", "1"};
         Output output = new StubOutput();
-        UserAction[] userActions = {new FindAllAction(output), new ExitProgramAction(output)};
+        List<UserAction> actions = new ArrayList<>();
+        actions.add(new FindAllAction(output));
+        actions.add(new ExitProgramAction(output));
         Input input = new StubInput(answers);
-        new StartUI(output).init(input, tracker, userActions);
+        new StartUI(output).init(input, tracker, actions);
         assertThat(output.toString(), is("Menu:" + System.lineSeparator() +
                 "0.=== All item ===" + System.lineSeparator() +
                 "1.===Exit===" + System.lineSeparator() +
@@ -89,8 +101,10 @@ public class StartUITest {
         Input input = new StubInput(answers);
         tracker.add(item);
         Output output = new StubOutput();
-        UserAction[] userActions = {new FindByNameAction(output), new ExitProgramAction(output)};
-        new StartUI(output).init(input, tracker, userActions);
+        List<UserAction> actions = new ArrayList<>();
+        actions.add(new FindByNameAction(output));
+        actions.add(new ExitProgramAction(output));
+        new StartUI(output).init(input, tracker, actions);
         assertThat(output.toString(), is("Menu:" + System.lineSeparator() +
                 "0.=== Find item by Name ===" + System.lineSeparator() +
                  "1.===Exit===" + System.lineSeparator() +
@@ -111,8 +125,11 @@ public class StartUITest {
         Input input = new StubInput(answers);
         tracker.add(item);
         Output output = new StubOutput();
-        UserAction[] userActions = {new FindByIdAction(output), new ExitProgramAction(output)};
-        new StartUI(output).init(input, tracker, userActions);
+        List<UserAction> actions = new ArrayList<>();
+        actions.add(new FindByIdAction(output));
+        actions.add(new ExitProgramAction(output));
+
+        new StartUI(output).init(input, tracker, actions);
         assertThat(output.toString(), is("Menu:" + System.lineSeparator() +
                 "0.=== Find item by Id ===" + System.lineSeparator() +
                 "1.===Exit===" + System.lineSeparator() +
@@ -130,8 +147,9 @@ public class StartUITest {
         Tracker tracker = Tracker.getTracker();
         Output out = new StubOutput();
         Input in = new StubInput(new String[] {"15", "0"});
-        UserAction[] userActions = {new ExitProgramAction(out)};
-        new StartUI(out).init(in, tracker, userActions);
+        List<UserAction> actions = new ArrayList<>();
+        actions.add(new ExitProgramAction(out));
+        new StartUI(out).init(in, tracker, actions);
         assertThat(out.toString(), is(  String.format(       "Menu:%n"
                         + "0.===Exit===%n"
                         + "Wrong input, you can select: 0 .. 0%n"
