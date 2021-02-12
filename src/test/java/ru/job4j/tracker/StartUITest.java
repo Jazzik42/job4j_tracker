@@ -11,6 +11,7 @@ import static org.hamcrest.core.IsNull.nullValue;
 
 public class StartUITest {
     @Test
+
     public void testInit() {
         Tracker tracker = Tracker.getTracker();
         Output output = new ConsoleOutput();
