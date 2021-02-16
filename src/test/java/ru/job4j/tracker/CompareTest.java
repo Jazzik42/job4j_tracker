@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.is;
 
 public class CompareTest {
     @Test
-    public void NameCompareReverse() {
+    public void nameCompareReverse() {
         NameCompareReverse nr = new NameCompareReverse();
         Tracker tracker = Tracker.getTracker();
         Item item1 = new Item("Mama");
@@ -29,7 +29,7 @@ public class CompareTest {
     }
 
     @Test
-    public void IdCompareReverse() {
+    public void idCompareReverse() {
         IdCompareReverse ir = new IdCompareReverse();
         Tracker tracker = Tracker.getTracker();
         Item item1 = new Item("Mama");
@@ -44,7 +44,7 @@ public class CompareTest {
     }
 
     @Test
-    public void NameCompare() {
+    public void nameCompare() {
         NameCompare nr = new NameCompare();
         Tracker tracker = Tracker.getTracker();
         Item item1 = new Item("Mama");
@@ -59,7 +59,7 @@ public class CompareTest {
     }
 
     @Test
-    public void IdCompare() {
+    public void idCompare() {
         IdCompare ir = new IdCompare();
         Tracker tracker = Tracker.getTracker();
         Item item1 = new Item("Mama");

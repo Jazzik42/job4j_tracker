@@ -6,10 +6,12 @@ public class ExitProgramAction implements UserAction {
     public ExitProgramAction(Output output) {
         this.output = output;
     }
+
     @Override
     public String name() {
         return "===Exit===";
     }
+
     @Override
     public boolean execute(Input input, Tracker tracker) {
         output.println("===Exit===");

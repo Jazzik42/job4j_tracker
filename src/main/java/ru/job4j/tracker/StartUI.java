@@ -45,19 +45,5 @@ public class StartUI {
         actions.add(new ExitProgramAction(output));
         new StartUI(output).init(input, tracker, actions);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 

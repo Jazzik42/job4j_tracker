@@ -6,6 +6,7 @@ public class FindAllAction implements UserAction {
     public FindAllAction(Output output) {
         this.output = output;
     }
+
     @Override
     public String name() {
         return "=== All item ===";
