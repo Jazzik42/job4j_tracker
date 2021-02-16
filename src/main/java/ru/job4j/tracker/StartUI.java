@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StartUI {
-    public final Output output;
+    private final Output output;
 
     public StartUI(Output output) {
         this.output = output;
