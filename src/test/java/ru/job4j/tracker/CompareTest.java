@@ -17,6 +17,7 @@ public class CompareTest {
     public void nameCompareReverse() {
         NameCompareReverse nr = new NameCompareReverse();
         Tracker tracker = Tracker.getTracker();
+        tracker.findAll().clear();
         Item item1 = new Item("Mama");
         Item item2 = new Item("Papa");
         Item item3 = new Item("Ded");
@@ -31,7 +32,7 @@ public class CompareTest {
     @Test
     public void idCompareReverse() {
         IdCompareReverse ir = new IdCompareReverse();
-        Tracker tracker = Tracker.getTracker();
+        Tracker tracker = new Tracker();
         Item item1 = new Item("Mama");
         Item item2 = new Item("Papa");
         Item item3 = new Item("Ded");
@@ -46,7 +47,7 @@ public class CompareTest {
     @Test
     public void nameCompare() {
         NameCompare nr = new NameCompare();
-        Tracker tracker = Tracker.getTracker();
+        Tracker tracker = new Tracker();
         Item item1 = new Item("Mama");
         Item item2 = new Item("Papa");
         Item item3 = new Item("Ded");
@@ -61,7 +62,7 @@ public class CompareTest {
     @Test
     public void idCompare() {
         IdCompare ir = new IdCompare();
-        Tracker tracker = Tracker.getTracker();
+        Tracker tracker = new Tracker();
         Item item1 = new Item("Mama");
         Item item2 = new Item("Papa");
         Item item3 = new Item("Ded");
