@@ -1,0 +1,27 @@
+package ru.job4j.tracker;
+
+public class Attachment {
+    private String name;
+    private int size;
+
+    public Attachment(String name, int size) {
+        this.name = name;
+        this.size = size;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "name='" + name + '\'' +
+                ", size=" + size +
+                '}';
+    }
+}
