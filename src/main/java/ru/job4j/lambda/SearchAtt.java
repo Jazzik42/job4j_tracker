@@ -15,23 +15,14 @@ public class SearchAtt {
         }
         return newList;
     }
+
     public static List<Attachment> filterName(List<Attachment> list, String name) {
-        Predicate<Attachment> predicate = new Predicate<>() {
-            @Override
-            public boolean test(Attachment att) {
-            return att.getName().contains(name);
-            }
-        };
-    return filter(list, predicate);
+        Predicate<Attachment> predicate = att -> att.getName().contains(name);
+        return filter(list, predicate);
     }
 
     public static List<Attachment> filterSize(List<Attachment> list, int size) {
-        Predicate<Attachment> predicate = new Predicate<>() {
-            @Override
-            public boolean test(Attachment att) {
-                return att.getSize() > size;
-            }
-        };
+        Predicate<Attachment> predicate = att -> att.getSize() > size;
         return filter(list, predicate);
     }
 
