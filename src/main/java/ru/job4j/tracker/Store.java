@@ -5,6 +5,8 @@ import java.util.List;
 public interface Store extends AutoCloseable {
     void init();
 
+    void close() throws Exception;
+
     Item add(Item item);
 
     boolean replace(int id, Item item);
@@ -13,8 +15,9 @@ public interface Store extends AutoCloseable {
 
     List<Item> findAll();
 
+    Item findById(int id);
+
     List<Item> findByName(String key);
 
-    Item findById(int id);
 }
 
