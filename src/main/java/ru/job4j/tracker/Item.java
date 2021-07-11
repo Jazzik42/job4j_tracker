@@ -2,10 +2,9 @@ package ru.job4j.tracker;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 public class Item {
-    private static final DateTimeFormatter FORMATTER =
+    private final DateTimeFormatter FORMATTER =
             DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     private String name;
     private int id;

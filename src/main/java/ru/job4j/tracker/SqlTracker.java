@@ -40,7 +40,8 @@ public class SqlTracker implements Store {
     public Item add(Item item) {
         Item newItem = new Item();
         try (PreparedStatement pStatement = cn.prepareStatement(
-                "insert into Tracker(name, created) values (?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+                "insert into Tracker(name, created) values (?, ?)",
+                Statement.RETURN_GENERATED_KEYS)) {
             Timestamp timestamp = Timestamp.valueOf(item.getCreated());
             pStatement.setString(1, item.getName());
             pStatement.setTimestamp(2, timestamp);
