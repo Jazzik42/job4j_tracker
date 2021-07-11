@@ -34,7 +34,7 @@ public class CompareTest {
         Tracker tracker = new Tracker();
         Item item1 = new Item("Mama");
         Item item2 = new Item("Papa");
-        Item item3 = new Item("Ded");
+        Item item3 = new Item("Deda");
         tracker.add(item1);
         tracker.add(item2);
         tracker.add(item3);
