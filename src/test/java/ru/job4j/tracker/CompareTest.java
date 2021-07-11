@@ -15,61 +15,61 @@ public class CompareTest {
     @Test
     public void nameCompareReverse() {
         NameCompareReverse nr = new NameCompareReverse();
-        Tracker tracker = Tracker.getTracker();
-        tracker.findAll().clear();
+        MemTracker memTracker = MemTracker.getTracker();
+        memTracker.findAll().clear();
         Item item1 = new Item("Mama");
         Item item2 = new Item("Papa");
         Item item3 = new Item("Ded");
-        tracker.add(item1);
-        tracker.add(item2);
-        tracker.add(item3);
-        Collections.sort(tracker.findAll(), nr);
+        memTracker.add(item1);
+        memTracker.add(item2);
+        memTracker.add(item3);
+        Collections.sort(memTracker.findAll(), nr);
         List<Item> items = new ArrayList(Arrays.asList(item2, item1, item3));
-        assertThat(tracker.findAll(), is(items));
+        assertThat(memTracker.findAll(), is(items));
     }
 
     @Test
     public void idCompareReverse() {
         IdCompareReverse ir = new IdCompareReverse();
-        Tracker tracker = new Tracker();
+        MemTracker memTracker = new MemTracker();
         Item item1 = new Item("Mama");
         Item item2 = new Item("Papa");
         Item item3 = new Item("Deda");
-        tracker.add(item1);
-        tracker.add(item2);
-        tracker.add(item3);
-        Collections.sort(tracker.findAll(), ir);
+        memTracker.add(item1);
+        memTracker.add(item2);
+        memTracker.add(item3);
+        Collections.sort(memTracker.findAll(), ir);
         List<Item> items = new ArrayList(Arrays.asList(item3, item2, item1));
-        assertThat(tracker.findAll(), is(items));
+        assertThat(memTracker.findAll(), is(items));
     }
 
     @Test
     public void nameCompare() {
         NameCompare nr = new NameCompare();
-        Tracker tracker = new Tracker();
+        MemTracker memTracker = new MemTracker();
         Item item1 = new Item("Mama");
         Item item2 = new Item("Papa");
         Item item3 = new Item("Ded");
-        tracker.add(item1);
-        tracker.add(item2);
-        tracker.add(item3);
-        Collections.sort(tracker.findAll(), nr);
+        memTracker.add(item1);
+        memTracker.add(item2);
+        memTracker.add(item3);
+        Collections.sort(memTracker.findAll(), nr);
         List<Item> items = new ArrayList(Arrays.asList(item3, item1, item2));
-        assertThat(tracker.findAll(), is(items));
+        assertThat(memTracker.findAll(), is(items));
     }
 
     @Test
     public void idCompare() {
         IdCompare ir = new IdCompare();
-        Tracker tracker = new Tracker();
+        MemTracker memTracker = new MemTracker();
         Item item1 = new Item("Mama");
         Item item2 = new Item("Papa");
         Item item3 = new Item("Ded");
-        tracker.add(item1);
-        tracker.add(item2);
-        tracker.add(item3);
-        Collections.sort(tracker.findAll(), ir);
+        memTracker.add(item1);
+        memTracker.add(item2);
+        memTracker.add(item3);
+        Collections.sort(memTracker.findAll(), ir);
         List<Item> items = new ArrayList(Arrays.asList(item1, item2, item3));
-        assertThat(tracker.findAll(), is(items));
+        assertThat(memTracker.findAll(), is(items));
     }
 }

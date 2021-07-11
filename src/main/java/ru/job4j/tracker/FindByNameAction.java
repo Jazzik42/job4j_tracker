@@ -1,6 +1,5 @@
 package ru.job4j.tracker;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FindByNameAction implements UserAction {
@@ -16,10 +15,10 @@ public class FindByNameAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, MemTracker memTracker) {
         output.println("=== Find item by Name ===");
         String itemName = input.askStr("Enter name:");
-        List<Item> itemArr = tracker.findByName(itemName);
+        List<Item> itemArr = memTracker.findByName(itemName);
         if (itemArr.size() != 0) {
             for (Item items : itemArr) {
                 output.println("Item Id: " + items.getId());

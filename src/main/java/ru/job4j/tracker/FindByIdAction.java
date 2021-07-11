@@ -13,10 +13,10 @@ public class FindByIdAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, MemTracker memTracker) {
         output.println("=== Find item by Id ===");
         int itemId = input.askInt("Enter Id:");
-        Item item = tracker.findById(itemId);
+        Item item = memTracker.findById(itemId);
         if (item != null) {
             output.println("Item Name: " + item.getName());
         } else {
