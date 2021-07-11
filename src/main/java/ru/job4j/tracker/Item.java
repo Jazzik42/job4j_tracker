@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Item {
-    private final DateTimeFormatter FORMATTER =
+    private final DateTimeFormatter formatter =
             DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     private String name;
     private int id;
@@ -57,7 +57,7 @@ public class Item {
         return "Item{"
                 + "id=" + id
                 + ", name='" + name + '\''
-                + ", created=" + created.format(FORMATTER)
+                + ", created=" + created.format(formatter)
                 + '}';
     }
 }
