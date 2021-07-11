@@ -13,11 +13,11 @@ public class ReplaceAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, MemTracker memTracker) {
+    public boolean execute(Input input, Store tracker) {
         String itemName = input.askStr("Enter name:");
         int itemId = input.askInt("Enter id:");
         Item item = new Item(itemName, itemId);
-        output.println(memTracker.replace(itemId, item) ? "The application has been replaced."
+        output.println(tracker.replace(itemId, item) ? "The application has been replaced."
                 : "There is no application with this id.");
         return true;
     }

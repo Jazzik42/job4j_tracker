@@ -13,9 +13,9 @@ public class FindAllAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, MemTracker memTracker) {
+    public boolean execute(Input input, Store tracker) {
         output.println("=== All item ===");
-        for (Item items : memTracker.findAll()) {
+        for (Item items : tracker.findAll()) {
             output.println(items.getName() + " " + items.getId());
         }
         return true;
