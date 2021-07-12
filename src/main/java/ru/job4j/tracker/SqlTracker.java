@@ -1,9 +1,7 @@
 package ru.job4j.tracker;
 
 import java.io.InputStream;
-import java.security.spec.ECField;
 import java.sql.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +38,7 @@ public class SqlTracker implements Store {
     public Item add(Item item) {
         Item newItem = new Item();
         try (PreparedStatement pStatement = cn.prepareStatement(
-                "insert into Tracker(name, created) values (?, ?)",
+                "insert into items(name, created) values (?, ?)",
                 Statement.RETURN_GENERATED_KEYS)) {
             Timestamp timestamp = Timestamp.valueOf(item.getCreated());
             pStatement.setString(1, item.getName());
@@ -63,7 +61,7 @@ public class SqlTracker implements Store {
     public boolean replace(int id, Item item) {
         boolean result = false;
         try (PreparedStatement pStatement = cn.prepareStatement(
-                "update from Tracker set name = ?, created = ? where id = ?"
+                "update from items set name = ?, created = ? where id = ?"
         )) {
             Timestamp timestamp = Timestamp.valueOf(item.getCreated());
             pStatement.setString(1, item.getName());
@@ -80,7 +78,7 @@ public class SqlTracker implements Store {
     public boolean delete(int id) {
         boolean result = false;
         try (PreparedStatement pStatement = cn.prepareStatement(
-                "delete from Tracker where id = ?")) {
+                "delete from items where id = ?")) {
             pStatement.setInt(1, id);
             result = pStatement.executeUpdate() > 0;
         } catch (Exception e) {
@@ -93,7 +91,7 @@ public class SqlTracker implements Store {
     public List<Item> findAll() {
         List<Item> result = new ArrayList<>();
         try (PreparedStatement pStatement = cn.prepareStatement(
-                "select * from Tracker")) {
+                "select * from items")) {
             try (ResultSet resultSet = pStatement.executeQuery()) {
                 while (resultSet.next()) {
                     LocalDateTime localDateTime = resultSet.getTimestamp(3).toLocalDateTime();
@@ -111,7 +109,7 @@ public class SqlTracker implements Store {
     public List<Item> findByName(String key) {
         List<Item> result = new ArrayList<>();
         try (PreparedStatement pStatement = cn.prepareStatement(
-                "select from Tracker where name = ?")) {
+                "select from items where name = ?")) {
             pStatement.setString(1, key);
             ResultSet resultSet = pStatement.executeQuery();
             while (resultSet.next()) {
@@ -131,10 +129,10 @@ public class SqlTracker implements Store {
     public Item findById(int id) {
         Item item = null;
         try (PreparedStatement pStatement = cn.prepareStatement(
-                "select from Tracker where id = ?")) {
+                "select from items where id = ?")) {
             pStatement.setInt(1, id);
             ResultSet resultSet = pStatement.executeQuery();
-            while (resultSet.next()) {
+            if (resultSet.next()) {
                 LocalDateTime localDateTime = resultSet.getTimestamp(3).toLocalDateTime();
                 item = new Item(
                         resultSet.getString(2),
