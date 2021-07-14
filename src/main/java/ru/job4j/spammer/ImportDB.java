@@ -21,8 +21,7 @@ public class ImportDB {
     public List<User> load() throws IOException {
         List<User> users = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(dump))) {
-            br.lines().forEach(x ->
-            {
+            br.lines().forEach(x -> {
                 String[] data = x.split(";");
                 users.add(new User(data[0],
                         data[1]));
@@ -49,7 +48,7 @@ public class ImportDB {
         }
     }
 
-    public static void main(String[] args) throws Exception  {
+    public static void main(String[] args) throws Exception {
         Properties cfg = new Properties();
         try (FileInputStream in = new FileInputStream("./app.properties")) {
             cfg.load(in);
