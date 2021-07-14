@@ -21,10 +21,14 @@ public class ImportDB {
     public List<User> load() throws IOException {
         List<User> users = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(dump))) {
-            br.lines().forEach(x -> users.add(new User(x.split(";")[0],
-                    x.split(";")[1])));
+            br.lines().forEach(x ->
+            {
+                String[] data = x.split(";");
+                users.add(new User(data[0],
+                        data[1]));
+            });
+            return users;
         }
-        return users;
     }
 
     public void save(List<User> users) throws ClassNotFoundException, SQLException {
