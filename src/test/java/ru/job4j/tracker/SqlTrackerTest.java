@@ -1,9 +1,6 @@
 package ru.job4j.tracker;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 
 import java.io.InputStream;
 import java.sql.Connection;
@@ -60,7 +57,7 @@ public class SqlTrackerTest {
         SqlTracker tracker = new SqlTracker(connection);
         Item item = new Item("item");
         tracker.add(item);
-        assertThat(tracker.findById(item.getId()), is(item));
+        Assert.assertThat(tracker.findById(item.getId()), is(item));
     }
 
     @Test

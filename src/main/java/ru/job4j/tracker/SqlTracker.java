@@ -77,8 +77,8 @@ public class SqlTracker implements Store {
             pStatement.setString(1, item.getName());
             pStatement.setTimestamp(2, timestamp);
             pStatement.setInt(3, id);
-            result = pStatement.executeUpdate() > 0;
             item.setId(id);
+            result = pStatement.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
         }
