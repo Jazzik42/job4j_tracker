@@ -11,6 +11,17 @@ public class SqlTracker implements Store {
 
     private Connection cn;
 
+    public SqlTracker() {
+    }
+
+    public SqlTracker(Connection cn) {
+        this.cn = cn;
+    }
+
+    public Connection getCn() {
+        return cn;
+    }
+
     @Override
     public void init() {
         try (InputStream in = SqlTracker.class.getClassLoader()
@@ -36,7 +47,6 @@ public class SqlTracker implements Store {
 
     @Override
     public Item add(Item item) {
-        Item newItem = new Item();
         try (PreparedStatement pStatement = cn.prepareStatement(
                 "insert into items(name, created) values (?, ?)",
                 Statement.RETURN_GENERATED_KEYS)) {
@@ -46,28 +56,29 @@ public class SqlTracker implements Store {
             pStatement.executeUpdate();
             try (ResultSet generatedKeys = pStatement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    newItem.setId(generatedKeys.getInt(1));
-                    newItem.setName(item.getName());
-                    newItem.setCreated(item.getCreated());
+                    item.setId(generatedKeys.getInt(1));
+                    item.setName(item.getName());
+                    item.setCreated(item.getCreated());
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return newItem;
+        return item;
     }
 
     @Override
     public boolean replace(int id, Item item) {
         boolean result = false;
         try (PreparedStatement pStatement = cn.prepareStatement(
-                "update from items set name = ?, created = ? where id = ?"
+                "update items set name = ?, created = ? where id = ?"
         )) {
             Timestamp timestamp = Timestamp.valueOf(item.getCreated());
             pStatement.setString(1, item.getName());
             pStatement.setTimestamp(2, timestamp);
-            pStatement.setInt(3, item.getId());
+            pStatement.setInt(3, id);
             result = pStatement.executeUpdate() > 0;
+            item.setId(id);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -109,7 +120,7 @@ public class SqlTracker implements Store {
     public List<Item> findByName(String key) {
         List<Item> result = new ArrayList<>();
         try (PreparedStatement pStatement = cn.prepareStatement(
-                "select from items where name = ?")) {
+                "select * from items where name = ?")) {
             pStatement.setString(1, key);
             ResultSet resultSet = pStatement.executeQuery();
             while (resultSet.next()) {
@@ -129,15 +140,18 @@ public class SqlTracker implements Store {
     public Item findById(int id) {
         Item item = null;
         try (PreparedStatement pStatement = cn.prepareStatement(
-                "select from items where id = ?")) {
+                "select * from items where id = ?")) {
             pStatement.setInt(1, id);
-            ResultSet resultSet = pStatement.executeQuery();
-            if (resultSet.next()) {
-                LocalDateTime localDateTime = resultSet.getTimestamp(3).toLocalDateTime();
-                item = new Item(
-                        resultSet.getString(2),
-                        resultSet.getInt(1),
-                        localDateTime);
+            try (ResultSet resultSet = pStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int ids = resultSet.getInt(1);
+                    String name = resultSet.getString(2);
+                    LocalDateTime localDateTime = resultSet.getTimestamp(
+                            3).toLocalDateTime();
+                    item = new Item(name,
+                            ids,
+                            localDateTime);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
