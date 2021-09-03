@@ -1,4 +1,5 @@
 package ru.job4j.tracker;
+
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -8,7 +9,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 public class ActionTestWithMockito {
-
 
     @Test
     public void whenReplaceFirstTest() {
