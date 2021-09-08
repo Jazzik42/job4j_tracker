@@ -1,14 +1,20 @@
 package ru.job4j.tracker;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+@Entity
+@Table(name = "items")
 public class Item {
-    private final DateTimeFormatter formatter =
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private static final DateTimeFormatter formatter =
             DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     private String name;
-    private int id;
+
     private LocalDateTime created = LocalDateTime.now();
 
     public Item() {
