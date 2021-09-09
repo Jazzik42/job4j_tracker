@@ -13,8 +13,9 @@ public class HbmRun {
                 .build();
         final SessionFactory sF = new MetadataSources(registry).buildMetadata()
                 .buildSessionFactory();
-        Session session = sF.openSession();
+        Session session = null;
         try {
+            session = sF.openSession();
             session.beginTransaction();
             CarBrand volvo = new CarBrand("Volvo");
             volvo.addCars(new CarModel("xc40"));
