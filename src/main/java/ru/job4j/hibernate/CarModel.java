@@ -12,11 +12,19 @@ public class CarModel {
 
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "carBrand_id")
+    private CarBrand carBrand;
+
     public CarModel() {
     }
 
     public CarModel(String name) {
         this.name = name;
+    }
+
+    public void setCarBrand(CarBrand carBrand) {
+        this.carBrand = carBrand;
     }
 
     public int getId() {

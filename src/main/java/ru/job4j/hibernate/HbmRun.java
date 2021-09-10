@@ -6,6 +6,9 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HbmRun {
 
     public static void main(String[] args) {
@@ -14,21 +17,24 @@ public class HbmRun {
         final SessionFactory sF = new MetadataSources(registry).buildMetadata()
                 .buildSessionFactory();
         Session session = null;
+        List<CarBrand> list = new ArrayList<>();
         try {
             session = sF.openSession();
             session.beginTransaction();
-            CarBrand volvo = new CarBrand("Volvo");
-            volvo.addCars(new CarModel("xc40"));
-            volvo.addCars(new CarModel("xc50"));
-            volvo.addCars(new CarModel("xc60"));
-            volvo.addCars(new CarModel("xc70"));
-            session.save(volvo);
+            list = session.createQuery(
+                    "select distinct c from CarBrand c join fetch c.cars").list();
             session.getTransaction().commit();
+            session.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            session.close();
             StandardServiceRegistryBuilder.destroy(registry);
+        }
+        for (CarBrand cars : list) {
+            for (CarModel car : cars.getCars()) {
+                System.out.println(car);
+            }
         }
     }
 }
