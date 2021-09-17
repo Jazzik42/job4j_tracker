@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "carBrand")
+@Table(name = "car_brand")
 public class CarBrand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +22,10 @@ public class CarBrand {
 
     public CarBrand(String name) {
         this.name = name;
+    }
+
+    public void setCars(CarModel model) {
+        cars.add(model);
     }
 
     public List<CarModel> getCars() {

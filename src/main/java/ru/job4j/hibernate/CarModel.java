@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "carModel")
+@Table(name = "car_model")
 public class CarModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +21,10 @@ public class CarModel {
 
     public CarModel(String name) {
         this.name = name;
+    }
+
+    public CarBrand getCarBrand() {
+        return carBrand;
     }
 
     public void setCarBrand(CarBrand carBrand) {
